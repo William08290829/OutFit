@@ -1,5 +1,6 @@
 # OutFit
 > Fit the weather Outside
+
 The website provides users with outfit suggestions based on the temperature and weather conditions.
 
 ## Requirement
