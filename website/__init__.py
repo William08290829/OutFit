@@ -7,10 +7,8 @@ def create_app():
     
     # import blueprint
     from .views import views
-    from .auth import auth
     
     app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(auth, url_prefix='/')
     
     @app.errorhandler(404)
     def invalid_route(e):
