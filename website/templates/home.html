@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+{% block title %}OutFit{% endblock %}
+
+{% if default_weather_data %}
+    <!-- right_side --> 
+    {% block current_temp %}{{default_weather_data.temperature}}{% endblock %}
+    {% block current_icon %} <img src="{{ url_for('static', filename='assets/images/weather_icons/' + default_weather_data.icon + '.png') }}" width="64" height="64" alt="Overcast Clouds" class="weather-icon"> {% endblock %}
+    {% block current_date %}{{default_weather_data.date}}, {{default_weather_data.weekday}}{% endblock %}
+    {% block current_city %}{{default_weather_data.city}}{% endblock%}
+    {% block current_description %}{{default_weather_data.description}}{% endblock%}
+    {% block max_temp %}{{default_weather_data.max_temperature}}{% endblock %}
+    {% block min_temp %}{{default_weather_data.min_temperature}}{% endblock %}
+
+
+
+    <!-- FORECAST --> 
+    {% block card_d0_icon %}<img src="{{ url_for('static', filename='assets/images/weather_icons/' + default_weather_data.icon + '.png') }}" width="36" height="36" alt="Overcast Clouds" class="weather icon">{% endblock %}
+    {% block card_d0_temp %}{{default_weather_data.temperature}}{% endblock%}
+    {% block card_d0_weekday %}{{default_weather_data.date}}{% endblock%}
+
+    
+
+
+    <!-- left_side --> 
+    {% block selection_date %}{{default_weather_data.date}}, {{default_weather_data.weekday}}{% endblock %}
+
+    
+        
+
+{% endif %}
+
+
+{% if forecast_keypoint_data %}
+    <!-- d1 -->
+    {% block d1_button %}/weather?&city=台北市&date=d1{% endblock %}
+    {% block card_d1_icon %}<img src="{{ url_for('static', filename='assets/images/weather_icons/' + forecast_keypoint_data[0].icon + '.png') }}" width="36" height="36" alt="Overcast Clouds" class="weather icon">{% endblock %}
+    {% block card_d1_temp %}{{forecast_keypoint_data[0].temp}}{% endblock%}
+    {% block card_d1_date %}{{forecast_keypoint_data[0].date}}{% endblock%}
+    {% block card_d1_weekday %}{{forecast_keypoint_data[0].weekday}}{% endblock%}
+
+    <!-- d2 -->
+    {% block d2_button %}/weather?&city=台北市&date=d2{% endblock %}
+    {% block card_d2_icon %}<img src="{{ url_for('static', filename='assets/images/weather_icons/' + forecast_keypoint_data[1].icon + '.png') }}" width="36" height="36" alt="Overcast Clouds" class="weather icon">{% endblock %}
+    {% block card_d2_temp %}{{forecast_keypoint_data[1].temp}}{% endblock%}
+    {% block card_d2_date %}{{forecast_keypoint_data[1].date}}{% endblock%}
+    {% block card_d2_weekday %}{{forecast_keypoint_data[1].weekday}}{% endblock%}
+    
+    <!-- d3 -->
+    {% block d3_button %}/weather?&city=台北市&date=d3{% endblock %}
+    {% block card_d3_icon %}<img src="{{ url_for('static', filename='assets/images/weather_icons/' + forecast_keypoint_data[2].icon + '.png') }}" width="36" height="36" alt="Overcast Clouds" class="weather icon">{% endblock %}
+    {% block card_d3_temp %}{{forecast_keypoint_data[2].temp}}{% endblock%}
+    {% block card_d3_date %}{{forecast_keypoint_data[2].date}}{% endblock%}
+    {% block card_d3_weekday %}{{forecast_keypoint_data[2].weekday}}{% endblock%}
+
+    <!-- d4 -->
+    {% block d4_button %}/weather?&city=台北市&date=d4{% endblock %}
+    {% block card_d4_icon %}<img src="{{ url_for('static', filename='assets/images/weather_icons/' + forecast_keypoint_data[3].icon + '.png') }}" width="36" height="36" alt="Overcast Clouds" class="weather icon">{% endblock %}
+    {% block card_d4_temp %}{{forecast_keypoint_data[3].temp}}{% endblock%}
+    {% block card_d4_date %}{{forecast_keypoint_data[3].date}}{% endblock%}
+    {% block card_d4_weekday %}{{forecast_keypoint_data[3].weekday}}{% endblock%}
+
+
+    {% block oufit_image_0 %}
+        {% if outfit_image_url %}
+        <img src="{{outfit_image_url[0]}}" 
+            loading="lazy" alt="" class="outfit-image" title="">
+        
+        {% else %}
+        <img src="{{ url_for('static', filename='assets/images/clothing-hanger.png') }}"
+            loading="lazy" alt="" class="weather-icon" title="">
+        {% endif %}
+
+    {% endblock %}
+
+
+    {% block oufit_image_1 %}
+        {% if outfit_image_url %}
+        <img src="{{outfit_image_url[1]}}" 
+            loading="lazy" alt="" class="outfit-image" title="">
+        {% else %}
+        <img src="{{ url_for('static', filename='assets/images/tshirt.png') }}"
+            loading="lazy" alt="" class="weather-icon" title="">
+        {% endif %}
+    {% endblock %}
+
+    {% block oufit_image_2 %}
+        {% if outfit_image_url %}
+        <img src="{{outfit_image_url[2]}}" 
+            loading="lazy" alt="" class="outfit-image" title="">
+        {% else %}
+        <img src="{{ url_for('static', filename='assets/images/pants.png') }}"
+            loading="lazy" alt="" class="weather-icon" title="">
+        {% endif %}
+    {% endblock %}
+
+    {% block oufit_image_3 %}
+        {% if outfit_image_url %}
+        <img src="{{outfit_image_url[3]}}" 
+            loading="lazy" alt="" class="outfit-image" title="">
+        {% else %}
+        <img src="{{ url_for('static', filename='assets/images/sun-glasses.png') }}"
+            loading="lazy" alt="" class="weather-icon" title="">
+        {% endif %}
+    {% endblock %}
+
+    {% block oufit_image_4 %}
+        {% if outfit_image_url %}
+        <img src="{{outfit_image_url[4]}}" 
+            loading="lazy" alt="" class="outfit-image" title="">
+        {% else %}
+        <img src="{{ url_for('static', filename='assets/images/sneakers.png') }}"
+            loading="lazy" alt="" class="weather-icon" title="">
+        {% endif %}
+    {% endblock %}
+
+    {% block oufit_image_5 %}
+        {% if outfit_image_url %}
+        <img src="{{outfit_image_url[5]}}" 
+            loading="lazy" alt="" class="outfit-image" title="">
+        {% else %}
+        <img src="{{ url_for('static', filename='assets/images/hat.png') }}"
+            loading="lazy" alt="" class="weather-icon" title="">
+        {% endif %}
+    {% endblock %}
+    
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+{% block graph %}
+
+<canvas id="lineChart"></canvas>
+
+
+<script>
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var lineChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: {{ timestamp_labels | safe }},
+            datasets: [
+                {
+                    label: "溫度",
+                    data: {{ temp_values | safe }},
+                    fill: true,
+                    backgroundColor: 'rgb(160, 201, 156, 0.2)',
+                    borderColor: "rgb(160, 201, 156)",
+                    lineTension: 0.3,
+                    borderWidth: 5,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero:true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+
+        }
+    });
+</script>
+
+{% endblock%}
+
+{% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- <script>
+
+    function fetchAndDisplayOutfitImage() {
+        fetch('/get_outfit_image_urls_default')
+            .then(response => response.json())
+            .then(data => {
+                // document.getElementById('outfit_image').src = data.outfit_image_url;
+                var outfitImageUrls = data.outfit_image_url;
+                var outfit_img = $('.slider-card .weather-icon');
+                var outfit_card = $('.slider-card');
+
+                if (outfit_img.length === outfitImageUrls.length) {
+                    outfit_img.each(function(index) {
+                        $(this).addClass('outfit-image');
+                        $(this).attr('src', outfitImageUrls[index]);
+                    });
+                } else {
+                    console.error('數量不匹配');
+                }
+            });
+    }
+
+    // Call the function to fetch and display outfit image
+    window.onload = fetchAndDisplayOutfitImage();
+    // fetchAndDisplayOutfitImage();
+</script> -->
+<script>
+    
+    $(document).ready(function() {
+        // 當頁面加載完成後，發送 Ajax 請求獲取 outfit_image_url
+        $.get("/get_outfit_image_urls_default", function(data) {
+            // 更新頁面上的 outfit_image_url 部分
+            var outfitImageUrls = data.outfit_image_url;
+            var outfit_img = $('.slider-card .weather-icon');
+            var outfit_card = $('.slider-card');
+    
+            if (outfit_img.length === outfitImageUrls.length) {
+                outfit_img.each(function(index) {
+                    $(this).addClass('outfit-image');
+                    $(this).attr('src', outfitImageUrls[index]);
+                });
+            } else {
+                console.error('數量不匹配');
+            }
+
+            $('.slider-card').removeClass('card-loading');
+            $('.slider-card .outfit-loading-text').remove();
+
+        
+        });
+    });
+</script>
+{% endblock %} 
+
+<!-- $(document).ready(function() {
+    // 當頁面加載完成後，發送 Ajax 請求獲取 outfit_image_url
+    $.get("/get_outfit_image_urls_default", function(data) {
+        // 更新頁面上的 outfit_image_url 部分
+        var outfitImageUrls = data.outfit_image_urls;
+        var outfit_img = $('.slider-card .weather-icon');
+        var outfit_card = $('.slider-card');
+
+        if (outfit_img.length === outfitImageUrls.length) {
+            outfit_img.each(function(index) {
+                $(this).addClass('outfit-image');
+                $(this).attr('src', outfitImageUrls[index]);
+            });
+        } else {
+            console.error('數量不匹配');
+        }
+
+        $('.slider-card').removeClass('card-loading');
+        $('.slider-card .outfit-loading-text').remove();
+        
+    });
+}); -->
