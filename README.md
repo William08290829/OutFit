@@ -12,7 +12,7 @@ pip install numpy
 ```
 
 ## Execute
-Just execute "main.py" file.
+Just execute "run.py" file.
 
 ## Features
 - Real-time Weather Integration: Seamlessly integrate with weather APIs to provide up-to-date information on temperature, probability of precipitation, and more for your location and city.

@@ -3,7 +3,7 @@ import secrets
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = secrets.token_hex(16)
+    app.config['SECRET_KEY'] = 'wei0829'
     
     # import blueprint
     from .routes import views
