@@ -6,9 +6,9 @@ def create_app():
     app.config['SECRET_KEY'] = secrets.token_hex(16)
     
     # import blueprint
-    from .views import views
+    from .routes import views
     
-    app.register_blueprint(views, url_prefix='/')
+    app.register_blueprint(routes, url_prefix='/')
     
     @app.errorhandler(404)
     def invalid_route(e):
