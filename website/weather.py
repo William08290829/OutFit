@@ -4,6 +4,8 @@ from datetime import datetime, date, timedelta, time
 import requests
 from dotenv import load_dotenv
 import os
+
+import json
 from dataclasses import dataclass
 import matplotlib.pyplot as plt
 import matplotlib
@@ -62,8 +64,10 @@ CITY = "台北市"
 DATE = date.today() + timedelta(days=1)
 
 def get_city_coordinates(city_name):
-    city_coordinates_url = "http://api.opencube.tw/twzipcode"
-    response = requests.get(city_coordinates_url).json()
+    # city_coordinates_url = "http://api.opencube.tw/twzipcode"
+    # response = requests.get(city_coordinates_url).json()
+    f = open("website/static/twLocation.json", "r")
+    response = json.load(f)
     
     for data in response.get("data", []):
         if data.get("city") == city_name:
