@@ -25,8 +25,6 @@ def home():
     
     timestamp_labels, temp_values = get_city_current_forecast_weather("台北市", API_KEY)
     
-    # outfit_image_url = get_ootd(default_weather_data.temperature)
-    
     
     # if outfit_image_url != []:
     #     print(outfit_image_url)
@@ -50,7 +48,7 @@ def home():
 @views.route('/get_outfit_image_urls_default')  # 這個路由是給前端呼叫的
 def get_outfit_image_urls_default():
     default_weather_data = default_get_weather()
-    outfit_image_url = get_ootd(default_weather_data.temperature)
+    outfit_image_url = get_ootd(default_weather_data.temperature, default_weather_data.max_temperature, default_weather_data.min_temperature)
     return jsonify({'outfit_image_url': outfit_image_url})
 
 
@@ -120,12 +118,13 @@ def get_outfit_image_urls_city():
         current_city_weather_data =  get_city_current_weather(city, API_KEY)
         
         if selected_date == "d0":
-            outfit_image_urls = get_ootd(current_city_weather_data.temperature)
+            outfit_image_urls = get_ootd(current_city_weather_data.temperature, current_city_weather_data.max_temperature, current_city_weather_data.min_temperature)
             return jsonify(outfit_image_urls=outfit_image_urls)
             
         elif selected_date == "d1" or selected_date == "d2" or selected_date == "d3" or selected_date == "d4":
             date_num = get_date_num_by_code(selected_date) - 1
-            outfit_image_urls = get_ootd(forecast_keypoint_data[date_num].temp)
+            city_forecast_data, timestamp_labels, temp_values = get_city_forecast_weather(city, API_KEY, selected_date)
+            outfit_image_urls = get_ootd(forecast_keypoint_data[date_num].temp, city_forecast_data.max_temperature, city_forecast_data.min_temperature)
             return jsonify(outfit_image_urls=outfit_image_urls)
             
     abort(404)    
@@ -194,12 +193,13 @@ def get_outfit_image_urls_location():
         current_loaction_weather_data =  get_lat_lon_current_weather(lat, lon, API_KEY)
         
         if selected_date == "d0":
-            outfit_image_urls = get_ootd(current_loaction_weather_data.temperature)
+            outfit_image_urls = get_ootd(current_loaction_weather_data.temperature, current_loaction_weather_data.max_temperature, current_loaction_weather_data.min_temperature)
             return jsonify(outfit_image_urls=outfit_image_urls)
             
         elif selected_date == "d1" or selected_date == "d2" or selected_date == "d3" or selected_date == "d4":
             date_num = get_date_num_by_code(selected_date) - 1
-            outfit_image_urls = get_ootd(forecast_keypoint_data[date_num].temp)
+            location_forecast_data, timestamp_labels, temp_values = get_lat_lon_forecast_weather(lat, lon, API_KEY, selected_date)
+            outfit_image_urls = get_ootd(forecast_keypoint_data[date_num].temp, location_forecast_data.max_temperature, location_forecast_data.min_temperature)
             return jsonify(outfit_image_urls=outfit_image_urls)
             
     abort(404)

@@ -181,7 +181,7 @@ def get_city_current_forecast_weather(city, API_key):
 # FORECAST
 
 def get_lat_lon_forecast_weather(lat, lon, API_key, date_code):
-    forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_key}&units=metric&appid={API_key}"
+    forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_key}&units=metric"
     response = requests.get(forecast_url).json()
     # print(response)
     
@@ -259,7 +259,7 @@ def get_city_forecast_weather(city, API_key, date_code):
 
 
 def get_lat_lon_forecast_keypoint(lat, lon,  API_key):
-    forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_key}&units=metric&appid={API_key}"
+    forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_key}&units=metric"
     response = requests.get(forecast_url).json()
     resp_forecast_list = response.get('list', [])
     
@@ -285,7 +285,8 @@ def get_lat_lon_forecast_keypoint(lat, lon,  API_key):
                 temp=temperature,
                 icon=icon,
                 date=formatted_date,
-                weekday=weekday
+                weekday=weekday,
+                
             )
             location_forecast_keypoint_list.append(timestamp_weather_data) 
             count += 1
@@ -296,7 +297,7 @@ def get_lat_lon_forecast_keypoint(lat, lon,  API_key):
 
 def get_city_forecast_keypoint(city, API_key):
     lat, lon = get_city_coordinates(city)
-    forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_key}&units=metric&appid={API_key}"
+    forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_key}&units=metric"
     response = requests.get(forecast_url).json()
     resp_forecast_list = response.get('list', [])
     

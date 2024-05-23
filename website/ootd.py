@@ -70,7 +70,7 @@
 import requests
 from dotenv import load_dotenv
 import os
-# import random
+import random
 
 load_dotenv()
 GOOGLE_SEARCH_API_KEY = os.getenv('GOOGLE_SEARCH_API_KEY')
@@ -109,24 +109,34 @@ def get_image_from_google(search_query, max_images):
 
 
 
-def get_ootd(temp):
+def get_ootd(temp, temp_max, temp_min):
     clothes_temp = 26 - temp
-    # clothes_temp_max = 26 - temp_max
-    # clothes_temp_min = 26 - temp_min
+    clothes_temp_max = 26 - temp_max
+    clothes_temp_min = 26 - temp_min
 
     if clothes_temp < 1:
         # print("衣服推薦: 短袖短褲")
-        recommend = "短袖短褲穿搭男" 
+        recommendations = ["男生短袖短褲穿搭", "男生夏日涼爽穿搭", "男生輕便夏裝"]
+        
     elif 1 <= clothes_temp <= 6:
         # print("衣服推薦: 襯衫 + 長褲")
-        recommend = "襯衫長褲穿搭男" 
+        if clothes_temp_max - clothes_temp_min > 5:
+            recommendations = ["男生薄長袖穿搭", "男生春季穿搭", "男生風衣穿搭"]
+        else:
+            recommendations = ["男生春季穿搭", "男生襯衫長褲穿搭", "男生薄長袖短褲穿搭"]
+            
     elif 5 <= clothes_temp <= 14:
         # print("衣服推薦: 帽T + 長褲 + 外套")
-        recommend = "厚帽T穿搭男" 
+        if clothes_temp_max - clothes_temp_min > 5:
+            recommendations = ["男生秋季穿搭", "男生針織衫穿搭", "男生風衣穿搭"]
+        else:
+            recommendations = ["男生厚帽T穿搭", "男生秋季穿搭", "男生薄長袖穿搭"]
+        
     elif 14 <= clothes_temp:
         # print("衣服推薦: 厚長袖or厚帽T + 厚外套")
-        recommend = "厚外套穿搭" 
+        recommendations = ["男生厚外套穿搭", "男生保暖大衣搭配", "男生冬季防寒穿搭"]
     
+    recommend = random.choice(recommendations)
     print(recommend)
     image_urls = get_image_from_google(recommend, 6)
     
