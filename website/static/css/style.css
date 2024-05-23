@@ -361,6 +361,9 @@ body{
     padding-inline: 56px 16px;
     outline: none;
 }
+.search-field:focus {
+    background-color: var(--surface);
+}
 
 .search-field::placeholder {color: var(--on-surface-variant-2);}
 .search-field::-webkit-search-cancel-button {display: none;}
@@ -388,6 +391,9 @@ body{
     align-items: center;
     gap: 16px;
     padding-inline: 16px 24px;
+}
+.search-view .noResultItem {
+    justify-content: center;
 }
 
 .search-view .view-item :is(.m-icon, .item-subtitle) {
@@ -632,9 +638,19 @@ article.container::before {
 .slider-container {
     overflow-x: auto;
     margin-inline: -16px;
+    /* cursor: grab; */
+}
+.slider-container:active {
+    cursor: grabbing;
 }
 
-.slider-container::-webkit-scrollbar {display: none;}
+/* .slider-container::-webkit-scrollbar {display: none;} */
+.slider-container::-webkit-scrollbar-thumb {
+    cursor: grab; 
+}
+.slider-container::-webkit-scrollbar-thumb:active {
+    cursor: grabbing; 
+}
 
 .slider-list {
     display: flex;
@@ -659,7 +675,7 @@ article.container::before {
 
 .slider-item .weather-icon {
     margin-inline: auto;
-    margin-block: 12px 6px;
+    /* margin-block: 12px 6px; */
     width: 72px;
     height: 72px;
     z-index: 1;;
@@ -711,7 +727,7 @@ article.container::before {
 .slider-item .outfit-image {
     /* width: 100%;  */
     width: auto;
-    height: auto;
+    height: 450px;
     max-height: 450px; 
     display: inline-block;
     border-radius: var(--radius-16);

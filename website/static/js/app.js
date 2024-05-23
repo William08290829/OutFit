@@ -6,7 +6,7 @@
 //  * @param {*} callback 
 //  */
 
-const fetchData = function (city, callback) {
+const fetchData = function (input, callback) {
     // 检查城市是否在允许的城市列表中
     const taiwanCities = [
         '台北市', '新北市', '桃園市', '台中市', '台南市', '高雄市',
@@ -16,12 +16,21 @@ const fetchData = function (city, callback) {
         '金門縣', '連江縣'
     ];
     
-    if (taiwanCities.includes(city)) {
-        // 如果城市在列表中，直接将城市传递给回调函数
-        callback(city);
-    } else {
-        // 如果城市不在列表中，可以选择执行一些其他操作或者什么都不做
-        // console.error(`City '${city}' is not allowed.`);
+    // if (taiwanCities.includes(city)) {
+    //     // 如果城市在列表中，直接将城市传递给回调函数
+    //     callback(city);
+    // } else {
+    //     // 如果城市不在列表中，可以选择执行一些其他操作或者什么都不做
+    //     // console.error(`City '${city}' is not allowed.`);
+    // }
+
+    let result = [];
+    if (input.length) {
+        const regex = new RegExp(input.split('').join('.*')); // 將輸入的字串轉換成正規表達式
+        result = taiwanCities.filter(city => regex.test(city));
+        
+        // callback all results
+        callback(result);
     }
 }
 
@@ -57,30 +66,43 @@ searchField.addEventListener("input", function() {
 
     if(searchField.value) {
         searchTimeout = setTimeout(() => {
-            fetchData(searchField.value, function (city) {
+            fetchData(searchField.value, function (cities) {
                 searchField.classList.remove("searching");
                 searchResult.classList.add("active");
+
                 searchResult.innerHTML =`
                     <ul class="view-list" data-search-list></ul>
                 `;
+                const searchList = searchResult.querySelector("[data-search-list]");
 
+                if (cities.length === 0) {
 
-                const items = [];
-                const searchItem = document.createElement("li");
-                searchItem.classList.add("view-item");
-                searchItem.innerHTML = `
-                    <span class="m-icon">location_on</span>
-                        <div>
-                            <p class="item-title">${city}</p>
-                            <p class="label-2 item-subtitle">台灣</p>
-                        </div>
+                    const searchItem = document.createElement("li");
+                    searchItem.classList.add("view-item");
+                    searchItem.classList.add("noResultItem");
+                    searchItem.innerHTML = `
+                            <div>
+                                <p class="item-title noResult">查無結果</p>
+                            </div>
+                    `;
+                    searchList.appendChild(searchItem);
 
-                        <a href="/weather?&city=${encodeURIComponent(city)}&date=d0" class="item-link has-state" data-search-toggler></a>
-                `;
+                } else {
 
-                searchResult.querySelector("[data-search-list]").appendChild(searchItem);
-                items.push(searchItem.querySelector("[data-search-toggler]"));
-
+                    cities.forEach(city => {
+                        const searchItem = document.createElement("li");
+                        searchItem.classList.add("view-item");
+                        searchItem.innerHTML = `
+                            <span class="m-icon">location_on</span>
+                            <div>
+                                <p class="item-title">${city}</p>
+                                <p class="label-2 item-subtitle">台灣</p>
+                            </div>
+                            <a href="/weather?&city=${encodeURIComponent(city)}&date=d0" class="item-link has-state" data-search-toggler></a>
+                        `;
+                        searchList.appendChild(searchItem);
+                    });
+                }
             });
         }, searchTimeoutDuration);
     }
